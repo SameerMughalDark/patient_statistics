@@ -16,9 +16,9 @@ function PatientStatistics() {
 
     const [patientStatistics, setPatientStatistics] = useState([{
         serial_No: 6,
-        total_Practices: 250,
-        active_Practices: 450,
-        inActive_Practices: 150,
+        total_Practices: 350,
+        active_Practices: 550,
+        inActive_Practices: 190,
         total_Vendors: 190,
         ccM_Patient: 100,
         rtM_Patient: 200,
@@ -31,214 +31,126 @@ function PatientStatistics() {
         medical_Assistant: 280,
         staff: 300,
         blood_Pressure_Dev: 1000,
-        weight_Device: 800,
-        glocumenter_Device: 900,
-        pulse_Oximeter: 700
+        weight_Device: 900,
+        glocumenter_Device: 800,
+        pulse_Oximeter: 1100
     }])
-    const [bpDeviceCount, setBpDeviceCount] = useState([patientStatistics[0].blood_Pressure_Dev])
-    const [weightDeviceCount, setWeightDeviceCount] = useState([patientStatistics[0].weight_Device])
-    const [gmDeviceCount, setGMDeviceCount] = useState([patientStatistics[0].glocumenter_Device])
-    const [poDeviceCount, setPODeviceCount] = useState([patientStatistics[0].pulse_Oximeter])
 
 
+    // intialdata  of column bar diagram 
+
+    const barChartOptions = {
+
+        options: {
+            chart: {
+                type: 'bar',
+
+                height: 350,
+                fontFamily: 'Sans-serif',
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '58%',
+                    endingShape: 'rounded',
 
 
+                },
 
+            },
+            dataLabels: {
+                enabled: false,
+            },
 
+            // background horizontal measured lines of chart
+            grid: {
+                show: true,
+                borderColor: '#e0e0e0', // Color of the grid lines
+                // strokeDashArray: 2, // Length of the dashed line
+                position: 'back',
+                fontSize: "20px"
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
 
-    // Top left and Right Styling
-    const topBoxStyles = {
-        width: "100%",
-        height: "100px",
-        borderRadius: "10px 10px 10px 10px",
-        bgcolor: "#FFFFF",
-        boxShadow: 5,
-    }
-    // topLeftBoxInner Styling
-    const topLeftBoxInner = { display: 'flex', justifyContent: "space-between", width: '400px', }
-    // item aligining center horizontally and vertically
-    const alignItemCenterVH = {
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        // flexDirection:"column",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
+                categories: ['Available Devices', 'Allocated Devices', 'Malfunctioned Devices', 'Retrive Device',],
+            },
+            yaxis: {
 
-    }
-    // bar diagram section
-    const barDiagramSectionDiv = {
-        width: "100%",
-        borderRadius: "10px 10px 10px 10px",
-        bgcolor: "#FFFFF",
-        boxShadow: 5,
-        // padding:"40px"
-
-    }
-    const pieDiagramSection = {
-        width: "100%",
-        borderRadius: "10px 10px 10px 10px",
-        bgcolor: "#FFFFF",
-        boxShadow: 5,
-
-    }
-
-    // After bar diagaram devices inventory info
-    const devicesInventoryInfo = {
-        width: "100%",
-        height: "100px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        borderTop: "2px solid #DDDDDD",
-        borderRight: "2px solid #DDDDDD"
-        // boxShadow:4
-    }
-    const pieDiagarmSectionInnerDiv1 = {
-        display: 'flex',
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        flexDirection: "column",
-        width: "100%",
-        height: "350px",
-        boxShadow: '0px 6px 4px -2px rgba(0, 0, 0, 0.2)', // Adjust the values as needed
-
-    }
-    const pieDiagarmSectionInnerDiv2 = {
-        display: 'flex',
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        width: '100%',
-
-    }
-    const pieDiagarmSectionInnerDiv2Childs = {
-        width: "100%",
-        height: "40px",
-        display: 'flex',
-        justifyContent: "space-evenly",
-        alignItems: "center"
-        // flexDirection:"column"
-    }
-
-
-
-
-     // intialdata  of column bar diagram 
-   const inState= {
-
-    series: [
-        {
-            name: 'Blood Pressure Devices',
-            // data: bpDeviceCount,
-            data: [900,900,900,900],
-            color: "#325899",
-        },
-        {
-            name: 'Weight Devices',
-            // data: weightDeviceCount,
-            data: [900,900,900,900],
-
-            color: "#3F6AB8"
-        },
-        {
-            name: 'Glocumeter Devices',
-            // data: gmDeviceCount,
-            data: [900,900,900,900],
-
-            color: "#7991CF"
-        },
-        {
-            name: 'Pulse Oximeter',
-            // data: poDeviceCount,
-            data: [900,900,900,900],
-
-            color: "#B4BFDF"
-        }
-
-    ],
-
-    options: {
-        chart: {
-            type: 'bar',
-
-            height: 350,
-            fontFamily: 'Sans-serif',
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '58%',
-                endingShape: 'rounded',
-
+                // for setting title of the graph on y-axis
+                // title: {
+                //     text: '$ (thousands)'
+                // }
+                // for hiding values of horizontal grid text behind the bars
+                // show:false,
+            },
+            fill: {
+                opacity: 1,
+                colors: ['#325899', '#3F6AB8', '#7991CF', "#B4BFDF"],
 
             },
 
-        },
-        dataLabels: {
-            enabled: false,
-        },
-
-        // background horizontal measured lines of chart
-        grid: {
-            show: true,
-            borderColor: '#e0e0e0', // Color of the grid lines
-            // strokeDashArray: 2, // Length of the dashed line
-            position: 'back',
-            fontSize: "20px"
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
-        },
-        xaxis: {
-
-            categories: ['Available Devices', 'Allocated Devices', 'Malfunctioned Devices', 'Retrive Device',],
-        },
-        yaxis: {
-
-            // for setting title of the graph on y-axis
-            // title: {
-            //     text: '$ (thousands)'
-            // }
-            // for hiding values of horizontal grid text behind the bars
-            // show:false,
-        },
-        fill: {
-            opacity: 1,
-            colors: ['#325899', '#3F6AB8', '#7991CF', "#B4BFDF"],
-
-        },
-
-        // for changning the style of the series portion(Blood Pressure Devices, and other etc) 
-        legend: {
-            // horizontalAlign: 'left',
-            fontSize: '14px', // Font size of the series name
-            // fontFamily:"monospace",
-            fontWeight: 'bold',
-            labels: {
-                colors: ['#5A5A5A', "#5A5A5A", "#5A5A5A", "#5A5A5A"], // Color of the legend text
+            // for changning the style of the series portion(Blood Pressure Devices, and other etc) 
+            legend: {
+                // horizontalAlign: 'left',
+                fontSize: '14px', // Font size of the series name
+                // fontFamily:"monospace",
+                fontWeight: 'bold',
+                labels: {
+                    colors: ['#5A5A5A', "#5A5A5A", "#5A5A5A", "#5A5A5A"], // Color of the legend text
+                },
             },
-        },
 
-        tooltip: {
+            tooltip: {
 
-            y: {
-                formatter: function (val) {
-                    return val + " Number"
+                y: {
+                    formatter: function (val) {
+                        return val + " Number"
+                    }
                 }
             }
-        }
-    },
+        },
+    }
 
-};
+    const inState = {
+
+        series: [
+            {
+                name: 'Blood Pressure Devices',
+                data: [500, 500, 500, 500],
+                color: "#325899",
+            },
+            {
+                name: 'Weight Devices',
+                data: [600, 600, 600, 600],
+                color: "#3F6AB8"
+            },
+            {
+                name: 'Glocumeter Devices',
+                data: [700, 700, 700, 700],
+
+                color: "#7991CF"
+            },
+            {
+                name: 'Pulse Oximeter',
+                data: [800, 800, 800, 800],
+                color: "#B4BFDF"
+            }
+
+        ],
+
+
+    };
 
     const [columnBarData, setColumnBarData] = useState(inState)
 
-       // Pie Chart diagram
+
+
+    // Pie Chart diagram
     const options = {
         chart: {
             type: 'pie',
@@ -286,42 +198,6 @@ function PatientStatistics() {
             },
         },
     };
-    // creating function to get the stocks of device inventory from API
-    const getDeviceInventoryInfo=()=>{
-        console.log("bp...",bpDeviceCount)
-        console.log("wd...",weightDeviceCount)
-        console.log("gm...",gmDeviceCount)
-        console.log("po...",poDeviceCount)
-        console.log(columnBarData.series[0].data)
-     
-        
-
-        // using map to puting  values of our whole devices stocks into array
-        const bpDevices = patientStatistics.map((items) => {
-
-            return items.blood_Pressure_Dev
-        })
-        setBpDeviceCount(bpDevices);
-        
-        const wDevice = patientStatistics.map((items) => {
-
-            return items.weight_Device
-        })
-        setWeightDeviceCount(wDevice)
-        
-        const gmDevice = patientStatistics.map((items) => {
-
-            return items.glocumenter_Device
-        })
-        setGMDeviceCount(gmDevice)
-
-
-        const poDevice = patientStatistics.map((items) => {
-
-            return items.pulse_Oximeter
-        })
-        setPODeviceCount(poDevice)
-    }
 
     // Function For Fetching Data from API
     const fetchingData = async () => {
@@ -330,21 +206,138 @@ function PatientStatistics() {
         const data = (await resp.json()).result;
         setPatientStatistics(data);
 
+        // intialdata  of column bar diagram 
+        const newState = {
+
+            series: [
+                {
+                    name: 'Blood Pressure Devices',
+                    data: patientStatistics.map((items) => { return items.blood_Pressure_Dev }),
+                    color: "#325899",
+                },
+                {
+                    name: 'Weight Devices',
+                    data: patientStatistics.map((item) => { return item.weight_Device }),
+                    color: "#3F6AB8"
+                },
+                {
+                    name: 'Glocumeter Devices',
+                    data: patientStatistics.map((item) => { return item.glocumenter_Device }),
+
+                    color: "#7991CF"
+                },
+                {
+                    name: 'Pulse Oximeter',
+                    data: patientStatistics.map((item) => { return item.pulse_Oximeter }),
+                    color: "#B4BFDF"
+                }
+
+            ],
+
+        };
+        setColumnBarData(newState)
+
     }
+
+
 
     useEffect(() => {
         fetchingData();
-    }, [])
+    })
+
+
+
+    // sx values of mui components
+
+    // Top left and Right Styling
+    const topBoxStyles = {
+        width: "100%",
+        height: { xs: "200px", sm: "200px", md: "100px", lg: "100px", xl: "100px" },
+        borderRadius: "10px 10px 10px 10px",
+        bgcolor: "#FFFFF",
+        boxShadow: 5,
+    }
+    // topLeftBoxInner Styling
+    const topLeftBoxInner = { display: 'flex', justifyContent: "space-between", width: { xs: "300px", sm: "400px", md: "400px", lg: "400px", xl: "400px" }, }
+    // item aligining center horizontally and vertically
+    const alignItemCenterVH = {
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        // flexDirection:"column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+
+    }
+    // bar diagram section
+    const barDiagramSectionDiv = {
+        width: "100%",
+        borderRadius: "10px 10px 10px 10px",
+        bgcolor: "#FFFFF",
+        boxShadow: 5,
+        // padding:"40px"
+
+    }
+    // After bar diagaram devices inventory info
+    const devicesInventoryInfo = {
+        width: "100%",
+        height: "100px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        borderTop: "2px solid #DDDDDD",
+        borderRight: "2px solid #DDDDDD"
+        // boxShadow:4
+    }
+
+    const pieDiagramSection = {
+        width: "100%",
+        borderRadius: "10px 10px 10px 10px",
+        bgcolor: "#FFFFF",
+        boxShadow: 5,
+
+    }
+
+
+    const pieDiagarmSectionInnerDiv1 = {
+        display: 'flex',
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        flexDirection: "column",
+        width: "100%",
+        height: "350px",
+        boxShadow: '0px 6px 4px -2px rgba(0, 0, 0, 0.2)', // Adjust the values as needed
+
+    }
+    const pieDiagarmSectionInnerDiv2 = {
+        display: 'flex',
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        width: '100%',
+
+    }
+    const pieDiagarmSectionInnerDiv2Childs = {
+        width: "100%",
+        height: "40px",
+        display: 'flex',
+        justifyContent: "space-evenly",
+        alignItems: "center"
+        // flexDirection:"column"
+    }
+
+
     return (
         <>
             <Box width={"100%"}>
-                    <button onClick={getDeviceInventoryInfo}>CLick here to get previous record</button>
                 {/* section1 top boxes */}
                 <Grid container justifyContent="space-around">
                     <Grid item xs={12} sm={12} md={12} lg={9} xl={9}    >
                         <Box sx={topBoxStyles}  >
                             <Typography mx={2} fontSize={"30px"} color={"#046AA9"} fontWeight={600}>Practices</Typography>
-                            <Box width={"100%"} display={"flex"}>
+                            <Box width={"100%"} display={"flex"} sx={{ flexDirection: { xs: "column", sm: "column", md: "row", lg: "row", xl: "row" }, justifyContent: { xs: "center", sm: "center", md: "", lg: "", xl: "" }, alignItems: { xs: "center", sm: 'center', md: "", lg: "", xl: '' } }}  >
                                 <Box sx={topLeftBoxInner}>
                                     <Typography mx={2} variant="h3" fontSize={"25px"} fontWeight={600} width={"70%"} >Total Practices </Typography>
                                     <Typography variant="h5" width={"20%"} fontWeight={600} color={"#046AA9"}  >{patientStatistics[0].total_Practices}</Typography>
@@ -384,29 +377,29 @@ function PatientStatistics() {
 
                                     <div id="chart" style={{ width: "80%", padding: "40px", }}>
                                         <Typography mx={1} width={"50%"} fontSize={"30px"} color={"#046AA9"} fontWeight={600}>Devices Inventory</Typography>
-                                        <ReactApexCharts options={columnBarData.options} series={columnBarData.series} type="bar" height={350} />
+                                        <ReactApexCharts options={barChartOptions.options} series={columnBarData.series} type="bar" height={350} />
                                     </div>
                                 </Box>
                                 <Grid container textAlign={"center"}>
-                                    <Grid item lg={3} >
+                                    <Grid item xs={6} sm={6} md={3} lg={3} xl={3} >
                                         <Box sx={devicesInventoryInfo}>
                                             <Typography mx={2} variant="h3" fontSize={"20px"} width={"100%"} >Available Devices </Typography>
                                             <Typography variant="h5" textAlign={"center"} width={"100%"} fontWeight={600} color={"#496AA4"}  >{patientStatistics[0].available_Device}</Typography>
                                         </Box>
                                     </Grid>
-                                    <Grid item lg={3}>
+                                    <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
                                         <Box sx={devicesInventoryInfo}>
                                             <Typography mx={2} variant="h3" fontSize={"20px"} width={"100%"} >Allocated Devices </Typography>
                                             <Typography variant="h5" textAlign={"center"} width={"100%"} fontWeight={600} color={"#496AA4"}  >{patientStatistics[0].allowcated_Device}</Typography>
                                         </Box>
                                     </Grid>
-                                    <Grid item lg={3}>
+                                    <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
                                         <Box sx={devicesInventoryInfo}>
                                             <Typography mx={2} variant="h3" fontSize={"20px"} width={"100%"} >Malfunctioned Devices </Typography>
                                             <Typography variant="h5" textAlign={"center"} width={"100%"} fontWeight={600} color={"#496AA4"}  >{patientStatistics[0].mal_Functioned_Devices}</Typography>
                                         </Box>
                                     </Grid>
-                                    <Grid item lg={3}>
+                                    <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
                                         <Box sx={devicesInventoryInfo}>
                                             <Typography mx={2} variant="h3" fontSize={"20px"} width={"100%"} >Retrieve Devices </Typography>
                                             <Typography variant="h5" textAlign={"center"} width={"100%"} fontWeight={600} color={"#496AA4"}  >{patientStatistics[0].reterive_Device}</Typography>
@@ -426,11 +419,11 @@ function PatientStatistics() {
                             <Typography fontSize={"22px"} p={1} mt={2} color={"#046AA9"} fontWeight={600}>User Details</Typography>
                             <Box sx={pieDiagarmSectionInnerDiv2}>
                                 <Box sx={pieDiagarmSectionInnerDiv2Childs} >
-                                    <Box width={"45%"}>
+                                    <Box width={"44%"}>
                                         <Typography fontSize={"12px"} color={"#5E5E5E"} fontWeight={"bold"}>Practice Admin</Typography>
                                     </Box>
 
-                                    <Box width={"45%"}
+                                    <Box width={"30%"}
                                     >
 
                                         <Slider
@@ -438,80 +431,87 @@ function PatientStatistics() {
                                             // min={5}
                                             // step={1}
                                             max={500}
-                                            valueLabelFormat={patientStatistics[0].practice_Admin}
+                                            valueLabelFormat={patientStatistics[0].practice_Admin.toString()}
                                             valueLabelDisplay="auto"
-                                            aria-labelledby="non-linear-slider"
                                             sx={{
                                                 color: '#375B9F', height: '4px', '& .MuiSlider-thumb': {
                                                     color: "#FFFFFF",
-                                                    height: "13px",
-                                                    width: "13px",
+                                                    height: "10px",
+                                                    width: "10px",
                                                 },
                                             }}
 
 
                                         />
+                                    </Box>
 
+                                    <Box width={"10%"}  >
+                                        <Box fontFamily={""} bgcolor={"#375B9F"} color={"whitesmoke"} borderRadius={2} fontSize={"10px"} textAlign={"center"} >{patientStatistics[0].practice_Admin}</Box>
                                     </Box>
 
                                 </Box>
 
 
                                 <Box sx={pieDiagarmSectionInnerDiv2Childs} >
-                                    <Box width={"45%"}>
+                                    <Box width={"44%"}>
                                         <Typography fontSize={"12px"} color={"#5E5E5E"} fontWeight={"bold"}>Medical Assistant</Typography>
                                     </Box>
 
-                                    <Box width={"45%"}
+                                    <Box width={"30%"}
                                     >
                                         <Slider
                                             value={patientStatistics[0].medical_Assistant}
                                             // min={5}
                                             // step={1}
                                             max={500}
-                                            valueLabelFormat={patientStatistics[0].medical_Assistant}
+                                            valueLabelFormat={patientStatistics[0].medical_Assistant.toString()}
                                             valueLabelDisplay="auto"
-                                            aria-labelledby="non-linear-slider"
                                             sx={{
                                                 color: '#375B9F', height: '4px', '& .MuiSlider-thumb': {
                                                     color: "#FFFFFF",
-                                                    height: "13px",
-                                                    width: "13px",
+                                                    height: "10px",
+                                                    width: "10px",
                                                 },
                                             }}
 
                                         />
 
+                                    </Box>
+                                    <Box width={"10%"}  >
+                                        <Box fontFamily={""} bgcolor={"#375B9F"} color={"whitesmoke"} borderRadius={2} fontSize={"10px"} textAlign={"center"} >{patientStatistics[0].medical_Assistant}</Box>
                                     </Box>
 
                                 </Box>
 
 
                                 <Box sx={pieDiagarmSectionInnerDiv2Childs} >
-                                    <Box width={"45%"}>
+                                    <Box width={"44%"}>
                                         <Typography fontSize={"12px"} color={"#5E5E5E"} fontWeight={"bold"}>Staff</Typography>
                                     </Box>
 
-                                    <Box width={"45%"}
+                                    <Box width={"30%"}
                                     >
                                         <Slider
                                             value={patientStatistics[0].staff}
                                             step={1}
                                             max={500}
-                                            valueLabelFormat={patientStatistics[0].staff}
+                                            valueLabelFormat={patientStatistics[0].staff.toString()}
                                             valueLabelDisplay="auto"
-                                            aria-labelledby="non-linear-slider"
                                             sx={{
                                                 color: '#375B9F', height: '4px', '& .MuiSlider-thumb': {
                                                     color: "#FFFFFF",
-                                                    height: "13px",
-                                                    width: "13px",
+                                                    height: "10px",
+                                                    width: "10px",
                                                 },
                                             }}
 
                                         />
 
 
+                                    </Box>
+
+                                    <Box width={"10%"}  >
+                                        <Box fontFamily={""} bgcolor={"#375B9F"} color={"whitesmoke"} borderRadius={2} fontSize={"10px"} textAlign={"center"} >{patientStatistics[0].staff}</Box>
                                     </Box>
 
                                 </Box>
